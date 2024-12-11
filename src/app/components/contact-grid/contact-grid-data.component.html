@@ -1,0 +1,35 @@
+<div class="container mt-3">
+    <!-- Include the Add/Edit Component -->
+    <app-contact-add-edit
+      *ngIf="isFormVisible"
+      [contact]="contactModel"
+      [isEditMode]="isEditMode"
+      (save)="handleSave(contactModel)"
+      (cancel)="handleCancel()"
+    ></app-contact-add-edit>
+  
+    <!-- Contact List -->
+    <button class="btn btn-primary mb-3" (click)="onAddNew()">New Contact</button>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let contact of contacts$ | async">
+          <td>{{ contact.firstName }}</td>
+          <td>{{ contact.lastName }}</td>
+          <td>{{ contact.email }}</td>
+          <td>
+            <button class="btn btn-warning btn-sm" (click)="onEdit(contact)">Edit</button>
+            <button class="btn btn-danger btn-sm" (click)="onDelete(contact.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
